@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "vite build",
-    "server": "tsx ./src/server/main.ts",
-    "dev": "nodemon --delay 2 -w src -e js,jsx,json,ts,tsx -x \"npm run build && npm run server\""
+    "server": "npm run build && tsx ./src/server/main.ts",
+    "dev": "nodemon --delay 2 -w src -e js,jsx,json,ts,tsx -x \"npm run server\""
   },
   "keywords": [],
   "author": "Tamkish",
   "license": "ISC",
   "dependencies": {
+    "linq": "^4.0.2",
     "nodemon": "^3.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -19,11 +21,14 @@
     "socket.io-client": "^4.7.4",
     "tsx": "^4.7.1",
     "typescript": "^5.3.3",
+    "typescript-cookie": "^1.0.6",
+    "uuid": "^9.0.1",
     "vite": "^5.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
+    "@types/uuid": "^9.0.8",
     "@vitejs/plugin-react": "^4.2.1"
   }
 }

@@ -1,0 +1,1 @@
+export type Handler<TRequest, TResponse> = (request: TRequest, socketId: string) => TResponse
