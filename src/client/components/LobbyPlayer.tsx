@@ -12,6 +12,6 @@ export const LobbyPlayer = (props: { playerData: PlayerData, }) => {
         <li>color: {data.color}</li>
 
         {/*todo cards*/}
-
+<br/>
     </ul>
 }

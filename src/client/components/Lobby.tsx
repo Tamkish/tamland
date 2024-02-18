@@ -4,12 +4,14 @@ import {Loading} from "./Loading";
 import {socket} from "../socket";
 import {getOrGeneratePlayerId} from "../playerId";
 import {LobbyPlayer} from "./LobbyPlayer";
+import Enumerable from "linq";
+import from = Enumerable.from;
 
 
 export const Lobby = (props: { startGame: () => void }) => {
     const [players, setPlayers] = useState<PlayerData[]>([])
     const [isLoading, setIsLoading] = useState(true)
-
+    const isHost = from(players).any(playerData => playerData.isHost && playerData.playerId === getOrGeneratePlayerId())
 
     useEffect(() => {
         socket.emit(
@@ -19,6 +21,18 @@ export const Lobby = (props: { startGame: () => void }) => {
                 setPlayers(response.players)
                 setIsLoading(false)
             })
+
+
+        socket.on("lobbyChange", data => {
+            setPlayers(data.players)
+            if (data.hasGameStarted) {
+                props.startGame();
+            }
+        })
+
+        return () => {
+
+        }
     }, []);
 
     if (isLoading)
@@ -26,6 +40,12 @@ export const Lobby = (props: { startGame: () => void }) => {
 
     return <>
         <h1>lobby</h1>
+        {
+            isHost
+                ? (<div>you are the host. start the game (todo)</div>)
+                : null
+
+        }
         <h2>players:</h2>
         {
             players.length === 0
@@ -38,6 +58,5 @@ export const Lobby = (props: { startGame: () => void }) => {
                     }
                 </ul>
         }
-
     </>
 }

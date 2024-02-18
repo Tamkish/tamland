@@ -16,7 +16,7 @@ export const App = () => {
 
     useEffect(() => {
 
-        socket.on("welcome", () => {
+        socket.once("welcome", () => {
             setIsConnected(true)
             socket.emit(
                 "join",

@@ -1,6 +1,8 @@
-import {Signal} from "./signal";
+import {EmptySignal, Signal} from "./signal";
+import {LobbyChangedSignal} from "./fromServer/lobbyChange";
 
 export interface SignalsFromServer {
-    welcome: ()=>void;
+    welcome: EmptySignal,
+    lobbyChange: LobbyChangedSignal
 
 }
